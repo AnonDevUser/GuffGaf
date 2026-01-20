@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GuffGaf</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="{% static 'images/logo_placeholder.png' %}" alt="Logo">
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item">Feedback</a>
+                <a href="#" class="nav-item active">My guffgaff account</a>
+                <a href="#" class="nav-item">Analytics</a>
+                <a href="#" class="nav-item">Design</a>
+                <a href="#" class="nav-item">Badges</a>
+                <a href="#" class="upgrade-btn">upgrade</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Design</h2>
+                <div class="user-avatar-placeholder"></div>
+            </header>
+
+            <div class="content-form">
+                <input type="text" placeholder="Title" class="dashboard-input">
+                <input type="text" placeholder="Description" class="dashboard-input">
+                <input type="text" placeholder="Add proper..." class="dashboard-input">
+                <button class="btn-dark save-btn">Save</button>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

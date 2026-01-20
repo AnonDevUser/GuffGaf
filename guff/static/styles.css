@@ -1,0 +1,624 @@
+/* Global Styles */
+:root {
+    --primary-color: #007bff;
+    /* Adjust to match the specific blue in design */
+    --primary-hover: #0056b3;
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #f9f9f9;
+    --border-color: #ddd;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --font-heading: 'Same One', sans-serif;
+    /* Fallback if not available */
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #fff;
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-body);
+    /* Using Inter for headings as per design looks */
+    font-weight: 700;
+    color: #000;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Utilities */
+.btn-primary {
+    background-color: #000;
+    /* Black buttons in design */
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-dark {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-btn {
+    background-color: #1a9cff;
+    /* Bright blue */
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(26, 156, 255, 0.4);
+}
+
+.cta-btn:hover {
+    background-color: #0f8bec;
+    transform: translateY(-2px);
+}
+
+/* Auth Pages (Signup/Login) */
+.auth-page,
+.contact-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.auth-container,
+.contact-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.logo-small img {
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.auth-container h1,
+.contact-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.auth-form,
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form input,
+.contact-form input,
+.contact-form textarea {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    /* Slightly rounded corners */
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.auth-form input:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #000;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.terms-text {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 20px;
+    line-height: 1.4;
+}
+
+.terms-text a {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* Contact Page Specifics */
+.input-group-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group-icon input,
+.input-group-icon textarea {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.icon-right {
+    position: absolute;
+    right: 12px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Dashboard */
+.dashboard-page {
+    background-color: #fff;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 30px;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    margin-bottom: 50px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nav-item {
+    font-weight: 500;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.nav-item.active {
+    color: #000;
+    font-weight: 700;
+}
+
+.upgrade-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.user-avatar-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+}
+
+.content-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+}
+
+.dashboard-input {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+}
+
+.save-btn {
+    align-self: flex-start;
+    padding: 12px 40px;
+}
+
+/* Landing Page */
+.landing-page {
+    background-color: #000;
+    /* Dark theme base */
+    color: #fff;
+}
+
+/* Navbar */
+.landing-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 50px;
+    gap: 30px;
+}
+
+.landing-nav a {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.landing-nav .sign-in-btn {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+/* Hero */
+.hero-section {
+    text-align: center;
+    padding: 80px 20px 150px;
+    background: linear-gradient(180deg, #000 0%, #111 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.hero-section h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.hero-section p {
+    color: #888;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.hero-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: url('https://raw.githubusercontent.com/google/fonts/main/ofl/mountains.png') no-repeat center bottom;
+    /* Placeholder or CSS shape */
+    background-size: cover;
+    opacity: 0.2;
+}
+
+/* Features */
+.features-section {
+    background-color: #fff;
+    color: #000;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.features-section h3 {
+    font-size: 2rem;
+    margin-bottom: 50px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    text-align: left;
+    padding: 20px;
+}
+
+.feature-placeholder {
+    background-color: #ddd;
+    height: 150px;
+    border-radius: var(--radius-md);
+    width: 100%;
+}
+
+/* Pricing */
+.pricing-section {
+    background-color: #111;
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.pricing-section h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.pricing-subtitle {
+    margin-bottom: 50px;
+    color: #ccc;
+}
+
+.pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.price-card {
+    background-color: #fff;
+    color: #000;
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.price-header {
+    margin-bottom: 20px;
+}
+
+.price-header h4 {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.price-header h2 {
+    font-size: 2.5rem;
+    color: #1a9cff;
+}
+
+.price-card ul {
+    text-align: left;
+    margin-bottom: 30px;
+    line-height: 2;
+    font-size: 0.9rem;
+}
+
+.price-card .cta-btn {
+    width: 100%;
+}
+
+/* FAQ */
+.faq-section {
+    background-color: #000;
+    color: #fff;
+    padding: 80px 20px;
+}
+
+.faq-list {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #333;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.faq-cta {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Profile Page */
+.profile-page,
+.subscription-page {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.profile-container,
+.subscription-card {
+    background-color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-large,
+.avatar-medium {
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.profile-header h2 {
+    margin-bottom: 10px;
+}
+
+.profile-header p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.author-tag {
+    font-weight: 600;
+    color: #000;
+}
+
+.community-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.community-btn {
+    padding: 10px 25px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.community-btn.whatsapp {
+    background-color: #25D366;
+}
+
+.community-btn.discord {
+    background-color: #5865F2;
+}
+
+.community-rules {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.community-rules h3 {
+    margin-bottom: 15px;
+}
+
+.community-rules ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: var(--text-light);
+}
+
+.watermark {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+/* Subscription Page Specifics */
+.subscription-details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin: 20px 0;
+    text-align: left;
+}
+
+.detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.payment-methods {
+    margin-bottom: 30px;
+}
+
+.methods-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.method-icon {
+    width: 60px;
+    height: 40px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    border-radius: 4px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+}
