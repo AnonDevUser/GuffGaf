@@ -1,10 +1,84 @@
 {% load static %}
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title> works </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuffGaf - Join Waitlist</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
-<body>
-    <h1> Hello world! </h1>
-    <img src="{% static 'images/backdrop.png' %}">
+
+<body class="landing-page">
+    <!-- Navbar -->
+    <nav class="landing-nav">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="GuffGaf Logo">
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-titles">
+            <h1>Nepali ko Lagi GuffGaf</h1>
+            <h2>Monetize your social media channels</h2>
+        </div>
+        <p>Accept payments via Nepal channels and automatically manage Discord or WhatsApp members.</p>
+
+        <a href="#" class="cta-btn" onclick="openModal(); return false;">Join Waitlist</a>
+    </header>
+
+    <!-- Waitlist Modal -->
+    <div class="modal-overlay" id="waitlistModal">
+        <div class="waitlist-modal">
+            <button class="close-modal-btn" onclick="closeModal()">&times;</button>
+            <h2>Join the Waitlist</h2>
+            <p>Be the first to know when we launch and get exclusive perks!</p>
+
+            <form class="waitlist-form">
+                <input type="text" placeholder="Creator Name / Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <button type="submit" class="modal-submit-btn">Join Waitlist</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('waitlistModal');
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Handle Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Simple form submission handler (prevent default for now)
+        document.querySelector('.waitlist-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thanks for joining the waitlist! We will be in touch soon.');
+            closeModal();
+        });
+    </script>
+
 </body>
+
 </html>
