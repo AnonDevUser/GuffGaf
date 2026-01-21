@@ -36,9 +36,10 @@
             <h2>Join the Waitlist</h2>
             <p>Be the first to know when we launch and get exclusive perks!</p>
 
-            <form class="waitlist-form">
-                <input type="text" placeholder="Creator Name / Full Name" required>
-                <input type="email" placeholder="Email Address" required>
+            <form class="waitlist-form" method="post" action="{% url 'join' %}">
+                {% csrf_token %}
+                <input type="text" placeholder="Creator Name / Full Name" id="name" name="name" required>
+                <input type="email" placeholder="Email Address" id="email" name="email" required>
                 <button type="submit" class="modal-submit-btn">Join Waitlist</button>
             </form>
         </div>
@@ -55,6 +56,8 @@
         function closeModal() {
             modal.classList.remove('active');
             document.body.style.overflow = '';
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
         }
 
         // Close on outside click
@@ -71,11 +74,36 @@
             }
         });
 
-        // Simple form submission handler (prevent default for now)
-        document.querySelector('.waitlist-form').addEventListener('submit', (e) => {
+        // Form submission handler with Fetch API
+        document.querySelector('.waitlist-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Thanks for joining the waitlist! We will be in touch soon.');
-            closeModal();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'success') {
+                    alert('Thanks for joining the waitlist! We will be in touch soon.');
+                    closeModal();
+                    form.reset(); // Clear the form on success
+                } else {
+                    alert(data.message || 'Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            }
         });
     </script>
 
