@@ -5,8 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuffGaf - Nepali ko Lagi</title>
+    <title>GuffGaf - All of Your Communities</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <script src="{% static 'script.js' %}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 </head>
@@ -32,39 +34,7 @@
         </div>
     </nav>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hamburger Menu Logic
-            const hamburger = document.querySelector('.hamburger-btn');
-            const navPill = document.querySelector('.nav-pill');
 
-            if (hamburger) {
-                hamburger.addEventListener('click', () => {
-                    hamburger.classList.toggle('active');
-                    navPill.classList.toggle('active');
-                });
-            }
-
-            // FAQ Accordion Logic
-            const faqItems = document.querySelectorAll('.faq-item');
-
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                if (question) {
-                    question.addEventListener('click', () => {
-                        // Close other items
-                        faqItems.forEach(otherItem => {
-                            if (otherItem !== item) {
-                                otherItem.classList.remove('active');
-                            }
-                        });
-
-                        item.classList.toggle('active');
-                    });
-                }
-            });
-        });
-    </script>
 
     <!-- Hero Section -->
     <header class="hero-section">
@@ -74,7 +44,6 @@
         </div>
         <p>Accept payments via Nepal channels and automatically manage Discord or WhatsApp members.</p>
 
-        <span class="hero-subtext">support for WhatsApp and Discord</span>
         <a href="/signup" class="cta-btn-large">Join For Free!</a>
 
         <div class="hero-mountains">
@@ -87,31 +56,31 @@
         <h3>Features</h3>
 
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <h4>Easy Integration</h4>
                 <p>GuffGaf integration is straightforward, and if you face hiccups our support team will be with you!
                 </p>
             </div>
 
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-placeholder"></div>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-placeholder"></div>
-            </div>
-
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <h4>Free Landing Page</h4>
                 <p>All users get a free landing page with custom URL showcasing your communities.</p>
             </div>
 
-            <div class="feature-card">
+            <div class="feature-card reveal">
+                <div class="feature-placeholder"></div>
+            </div>
+
+            <div class="feature-card reveal">
                 <h4>0% Fee | FREE</h4>
                 <p>We have no hidden charges, you get everything you make!</p>
             </div>
 
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="feature-placeholder"></div>
             </div>
         </div>
@@ -190,13 +159,11 @@
             </div>
         </div>
 
-        <div class="faq-cta">
-            <a href="#" class="cta-btn">Join For Free!</a>
-        </div>
-    </section>
-
-    <!-- Mobile View (iPhone imitation) -->
-    <!-- This structure is simpler and responsive CSS will handle the mobile layout matching the design -->
+        <!-- Ready CTA Section -->
+        <section class="ready-cta">
+            <h3>Ready to start?</h3>
+            <a href="/signup" class="cta-btn-large">Join For Free!</a>
+        </section>
 
 </body>
 

@@ -1,17 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - GuffGaf</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="{% static 'script.js' %}" defer></script>
+     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body class="auth-page">
     <div class="auth-container">
         <div class="logo-small">
-            <img src="{% static 'images/logo_placeholder.png' %}" alt="Logo">
+            <img src="{% static 'images/logo-dark.png' %}" alt="Logo">
         </div>
         <h1>Join For Free</h1>
         <form class="auth-form">
@@ -20,14 +25,16 @@
             <input type="text" placeholder="+977 9800000000" required>
             <input type="password" placeholder="password" required>
             <input type="password" placeholder="re-enter password" required>
-            
+
             <div class="form-footer">
                 <a href="#" class="forgot-password">already have an account? login</a>
             </div>
-            
+
             <button type="submit" class="btn-primary">sign up</button>
-            <p class="terms-text">By joining you agree to our<br><a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+            <p class="terms-text">By joining you agree to our<br><a href="#">Terms of Service</a> and <a
+                    href="#">Privacy Policy</a></p>
         </form>
     </div>
 </body>
+
 </html>
