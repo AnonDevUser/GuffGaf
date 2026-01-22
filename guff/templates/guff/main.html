@@ -79,6 +79,13 @@
             e.preventDefault();
 
             const form = e.target;
+            const submitBtn = form.querySelector('.modal-submit-btn');
+            const originalBtnText = submitBtn.textContent;
+
+            // Disable button to prevent double clicks
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Joining...';
+
             const formData = new FormData(form);
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
@@ -103,6 +110,10 @@
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred. Please try again later.');
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
             }
         });
     </script>

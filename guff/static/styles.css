@@ -250,6 +250,12 @@ a {
     transform: translateY(-1px);
 }
 
+.modal-submit-btn:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+    transform: none;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .hero-section h1 {
