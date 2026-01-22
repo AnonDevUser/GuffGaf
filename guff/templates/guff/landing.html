@@ -14,30 +14,76 @@
 <body class="landing-page">
     <!-- Navbar -->
     <nav class="landing-nav">
-        <div class="nav-links">
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-            <a href="#">Join Free</a>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="GuffGaf" class="nav-logo">
         </div>
-        <a href="#" class="sign-in-btn">Sign In</a>
+
+        <button class="hamburger-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-pill">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="/signup" class="join-free">Join Free</a>
+            <a href="/login">Sign in</a>
+        </div>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu Logic
+            const hamburger = document.querySelector('.hamburger-btn');
+            const navPill = document.querySelector('.nav-pill');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navPill.classList.toggle('active');
+                });
+            }
+
+            // FAQ Accordion Logic
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', () => {
+                        // Close other items
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+
+                        item.classList.toggle('active');
+                    });
+                }
+            });
+        });
+    </script>
 
     <!-- Hero Section -->
     <header class="hero-section">
-        <h1>Nepali ko Lagi GuffGaf</h1>
-        <h2>Monetize your social media channels</h2>
+        <div class="hero-titles">
+            <h1>Nepali ko Lagi GuffGaf</h1>
+            <h2>Monetize your social media channels</h2>
+        </div>
         <p>Accept payments via Nepal channels and automatically manage Discord or WhatsApp members.</p>
 
-        <p class="small-text">support for WhatsApp and Discord</p>
-        <a href="#" class="cta-btn">Join For Free!</a>
+        <span class="hero-subtext">support for WhatsApp and Discord</span>
+        <a href="/signup" class="cta-btn-large">Join For Free!</a>
 
         <div class="hero-mountains">
-            <!-- Background mountain graphic matching design can be added via CSS -->
+            <!-- Background mountain graphic handled via CSS on hero-section or separate element -->
         </div>
     </header>
 
     <!-- Features Section -->
-    <section class="features-section">
+    <section class="features-section" id="features">
         <h3>Features</h3>
 
         <div class="features-grid">
@@ -72,7 +118,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing-section">
+    <section class="pricing-section" id="pricing">
         <h3>Pricing</h3>
         <p class="pricing-subtitle">Free for the first 1000 Creators!</p>
 
@@ -109,15 +155,39 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="faq-section" id="faq">
         <h3>FAQ</h3>
         <div class="faq-list">
-            <div class="faq-item">Why do I need GuffGaf? <span>+</span></div>
-            <div class="faq-item">How does it work? <span>+</span></div>
-            <div class="faq-item">How much do I have to pay? <span>+</span></div>
-            <div class="faq-item">Will there be more app integration? <span>+</span></div>
-            <div class="faq-item">How safe is my money? <span>+</span></div>
-            <div class="faq-item">What is the paying gateway for this? <span>+</span></div>
+            <div class="faq-item">
+                <div class="faq-question">Why do I need GuffGaf? <span>+</span></div>
+                <div class="faq-answer">GuffGaf simplifies monetizing your community by integrating local payment
+                    methods like eSewa and Khalti directly with Discord and WhatsApp.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How does it work? <span>+</span></div>
+                <div class="faq-answer">You create a landing page, set your pricing, and share the link. When members
+                    pay, they are automatically added to your private channels.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How much do I have to pay? <span>+</span></div>
+                <div class="faq-answer">It's free for the first 1000 creators! After that, we offer a simple monthly
+                    subscription model.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Will there be more app integration? <span>+</span></div>
+                <div class="faq-answer">Yes! We are constantly working on adding more integrations like Telegram and
+                    Slack in the future.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How safe is my money? <span>+</span></div>
+                <div class="faq-answer">Your payments are processed securely through established gateways like eSewa and
+                    Khalti. We don't store your sensitive banking info.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What is the paying gateway for this? <span>+</span></div>
+                <div class="faq-answer">We currently support eSewa and Khalti, the most popular digital wallets in
+                    Nepal.</div>
+            </div>
         </div>
 
         <div class="faq-cta">
