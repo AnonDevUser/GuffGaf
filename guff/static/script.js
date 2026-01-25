@@ -84,4 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     revealElements.forEach(el => observer.observe(el));
+
+    // Jump to Top Logic
+    const jumpToTopBtn = document.getElementById('jump-to-top');
+
+    if (jumpToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                jumpToTopBtn.classList.add('show');
+            } else {
+                jumpToTopBtn.classList.remove('show');
+            }
+        });
+
+        jumpToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });
