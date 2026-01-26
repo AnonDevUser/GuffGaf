@@ -27,6 +27,7 @@ class SubscriptionPlan(models.Model):
         related_name="plans",
         db_index=True
     )
+    subscription_bio = models.CharField(default="not provided", max_length=80)
     name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     interval = models.CharField(max_length=1, choices=INTERVAL_CHOICES)
