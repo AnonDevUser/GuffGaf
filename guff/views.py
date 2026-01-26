@@ -8,11 +8,6 @@ def main(request):
     return render(request, 'guff/main.html')
 
 def user_login(request):
-    """
-    logs in the user using (Django User)
-    
-    :parameters request: django request
-    """
     ...
 
 def user_logout(request):
