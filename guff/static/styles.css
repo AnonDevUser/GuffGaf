@@ -220,6 +220,12 @@ ul {
     margin-top: 20px;
     line-height: 1.4;
 }
+.footer {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 20px;
+    text-align: center;
+}
 
 .terms-text a {
     color: #000;
@@ -564,12 +570,14 @@ ul {
     padding: 20px;
 }
 
-.feature-placeholder {
+.feature-image {
     background-color: #ddd;
     height: 150px;
+    width: 250;
     border-radius: var(--radius-md);
     width: 100%;
 }
+
 
 /* Pricing */
 .pricing-section {
@@ -641,6 +649,12 @@ ul {
     padding: 80px 20px;
 }
 
+.faq-section h3{
+    font-size:2rem;
+    color: #fff;
+    text-align: center;
+}
+
 .faq-list {
     max-width: 700px;
     margin: 0 auto;
@@ -694,6 +708,7 @@ ul {
 .ready-cta {
     background-color: #0a1128;
     /* Different from normal black */
+    margin-top: 10px;
     color: #fff;
     padding: 100px 20px;
     text-align: center;
