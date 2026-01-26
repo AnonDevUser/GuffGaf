@@ -7,17 +7,28 @@ from django.contrib.auth.models import User
 def main(request):
     return render(request, 'guff/main.html')
 
-def user_login(request):
-    ...
+def login(request):
+    if request.method == "POST":
+        ...
+    else:
+        return render(request, "guff/login.html")
 
-def user_logout(request):
-    ...
+def logout(request):
+    if request.method == "POST":
+        ...
+    else:
+        return render(request, "guff/main.html")
 
 def signup(request):
-    ...
+    if request.method == "POST":
+        ...
+    else:
+        return render(request, "guff/signup.html")
 
-def user_profile(request):
-    ...
+def user_profile(request, id):
+    return render(request, "guff/profile.html", {
+        id: id
+    })
 
 def subscribe(request):
     ...
