@@ -1,6 +1,7 @@
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view
-from guff.models import UserProfile, SubscriptionPlan, UserSubscription, DiscordIntegration, WhatsAppIntegration, Payment
+from serializers import ProfileSerializer, DiscordSerializer, WhatsAppSerializer
+from subscription_serializers import UserSubSerializer, PlanSerializer, PaymentSerializer 
 
 @api_view(['GET'])
 def test(request):
