@@ -11,6 +11,7 @@ class UserSubSerializer(serializers.ModelSerializer):
         fields = ['username', 'plan_name', 'price', 'interval']
 
 class PlanSerializer(serializers.ModelSerializer):
+    creator = serializers.CharField(source="creator.user.username", read_only=True)
     class Meta:
         model = SubscriptionPlan
         fields = ['id', 'creator', 'subscription_bio', 'name', 'price', 'interval']
