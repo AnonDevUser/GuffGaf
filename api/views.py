@@ -38,7 +38,7 @@ def getplans(request, username):
     creator = get_object_or_404(UserProfile, user__username=username)
     if not creator.is_creator:
         return Response({"error": "user is not a creator"}, status=403)
-    plans = SubscriptionPlan.objects.filter(creator=creator).select_related('creator__user')
+    plans = SubscriptionPlan.objects.filter(creator=creator).select_related('creator__user', 'plan')
     return Response({"plans": PlanSerializer(plans, many=True).data}, status=200)
 
 @api_view(['POST'])
@@ -52,13 +52,20 @@ def plan_details(request, plan_id):
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
 def subscriptions(request):
+    user = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'GET':
-        user = get_object_or_404(UserProfile, user=request.user)
         if user.is_creator:
             return Response({"error": "trying to access using creator account"}, status=403)
         plans = UserSubscription.objects.filter(buyer=user).select_related('buyer__user', 'plan')
         return Response({"plans":UserSubSerializer(plans, many=True).data}, status=200)
-
+    
+    if request.method == "POST":
+        serializer = UserSubSerializer(data=request.data, context={"buyer": user})
+        if serializer.is_valid():
+            serializer.save(buyer=user)  
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
 
 @api_view(['DELETE'])
 def cancel_sub(requst, id):
