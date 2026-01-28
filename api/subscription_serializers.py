@@ -30,7 +30,6 @@ class UserSubSerializer(serializers.ModelSerializer):
 
         return attrs
 
-
 class PlanSerializer(serializers.ModelSerializer):
     creator = serializers.CharField(source="creator.user.username", read_only=True)
     class Meta:
@@ -43,6 +42,7 @@ class PlanSerializer(serializers.ModelSerializer):
                 'price', 
                 'interval'
             ]
+        read_only_fields = ['id', 'creator']
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
