@@ -35,9 +35,25 @@ class PlanSerializer(serializers.ModelSerializer):
     creator = serializers.CharField(source="creator.user.username", read_only=True)
     class Meta:
         model = SubscriptionPlan
-        fields = ['id', 'creator', 'subscription_bio', 'name', 'price', 'interval']
+        fields = [
+                'id',
+                'creator',
+                'subscription_bio', 
+                'name', 
+                'price', 
+                'interval'
+            ]
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment 
-        fields = ['id', 'buyer', 'plan', 'amount', 'gateway', 'transaction_id', 'status', 'created_at']
+        fields = [
+            'id',
+            'buyer', 
+            'plan', 
+            'amount', 
+            'gateway', 
+            'transaction_id', 
+            'status', 
+            'created_at'
+        ]
