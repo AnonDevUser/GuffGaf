@@ -35,6 +35,11 @@ def getuser(request, username):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getplans(request, username):
+    """
+    Returns plans created by creator
+
+    :param username: creator's username passed in URL
+    """
     creator = get_object_or_404(UserProfile, user__username=username)
     if not creator.is_creator:
         return Response({"error": "user is not a creator"}, status=403)
@@ -52,10 +57,14 @@ def plan_details(request, plan_id):
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
 def subscriptions(request):
+    """
+    adds or returns plans subscribed by the user for respective method
+    """
     user = get_object_or_404(UserProfile, user=request.user)
+    if user.is_creator:
+        return Response({"error": "trying to access using creator account"}, status=403)
+    
     if request.method == 'GET':
-        if user.is_creator:
-            return Response({"error": "trying to access using creator account"}, status=403)
         plans = UserSubscription.objects.filter(buyer=user).select_related('buyer__user', 'plan')
         return Response({"plans":UserSubSerializer(plans, many=True).data}, status=200)
     
