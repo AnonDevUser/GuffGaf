@@ -43,16 +43,36 @@ def getplans(request, username):
     creator = get_object_or_404(UserProfile, user__username=username)
     if not creator.is_creator:
         return Response({"error": "user is not a creator"}, status=403)
-    plans = SubscriptionPlan.objects.filter(creator=creator).select_related('creator__user', 'plan')
+    plans = SubscriptionPlan.objects.filter(creator=creator).select_related('creator__user')
     return Response({"plans": PlanSerializer(plans, many=True).data}, status=200)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def plans(request):
-    ...
+    """
+    Allows creator to create a new plan if authenticated
+    """
+    creator_profile = get_object_or_404(UserProfile, user=request.user)
+
+    if not creator_profile.is_creator:
+        return Response({'error': 'user is not a creator'}, status=403)
+
+    serializer = PlanSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)  
+    serializer.save(creator=creator_profile)
+    return Response(serializer.data, status=201)
+
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def plan_details(request, plan_id):
-    ...
+    """
+    returns details of specified plan
+    
+    :param plan_id: id of plan to be searched
+    """
+    plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+    return Response(PlanSerializer(plan).data, status=200)
 
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
@@ -77,8 +97,17 @@ def subscriptions(request):
             return Response(serializer.errors, status=400)
 
 @api_view(['DELETE'])
-def cancel_sub(requst, id):
-    ...
+@permission_classes([IsAuthenticated])
+def cancel_sub(request, id):
+    """
+    Disable user subscription
+    :param id: id of plan to be disabled, passed in url
+    """
+    buyer = get_object_or_404(UserProfile, user=request.user)
+    subscription = get_object_or_404(UserSubscription, buyer=buyer, id=id)
+    subscription.is_active = False
+    return Response({"status":"ok"}, status=200)
+
 
 @api_view(['POST'])
 def initiate_payment(request):
