@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
-from .models import UserProfile 
+from .models import UserProfile
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 
 # Create your views here.
 def main(request):
@@ -74,11 +73,13 @@ def landing(request):
     return render(request, "guff/landing.html")
 
 @login_required(login_url='login')
-#buggy - need ID passed (later)
-def creator_profile(request):
-    return render(request, "guff/creator_profile.html", {
-        "user":request.user 
-    })
+def creator_profile(request, username):
+    user = get_object_or_404(UserProfile, user__username=username)
+    if user.is_creator:
+        return render(request, "guff/creator_profile.html", {
+            "user":user
+        })
+    return redirect('landing')
 
 @login_required(login_url='login')
 def subscription(request):

@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - GuffGaf</title>
-     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'script.js' %}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 </head>
@@ -46,7 +47,7 @@
             </nav>
             <a href="#" class="upgrade-btn">upgrade</a>
             <a href="{% url 'logout' %}" class="upgrade-btn">logout</a>
-            
+
         </aside>
 
         <!-- Main Content -->
