@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GuffGaf</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'script.js' %}" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="logo-small">
+            <a href="{% url 'landing' %}"><img src="{% static 'images/logo-dark.png' %}" alt="Logo"></a>
+        </div>
+        <h1>login</h1>
+        <p class="subtitle">enter your details or email and password</p>
+        <form class="auth-form">
+            <input type="text" placeholder="email or username" required>
+            <input type="password" placeholder="password" required>
+            <div class="form-footer">
+                <a href="#" class="forgot-password">forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary">login</button>
+
+            <p class="terms-text"><a href="#">privacy</a> &bull; <a href="#">terms</a><br><a href="#"></p>
+            <p class="footer"> &#169; GuffGaf 2026</p>
+        </form>
+    </div>
+</body>
+</html>

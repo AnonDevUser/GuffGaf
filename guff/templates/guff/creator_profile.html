@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Profile - GuffGaf</title>
+     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="profile-page">
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="avatar-large"></div>
+            <h2>Aaren's Community</h2>
+            <p>The most quoted community in the market of the most popular nepali content creator, multi billionaire</p>
+            <a href="{% url 'landing' %}"><p class="author-tag">By @GuffGaf</p></a>
+        </div>
+
+        <div class="community-links">
+            <a href="#" class="community-btn whatsapp">WhatsApp</a>
+            <a href="#" class="community-btn discord">Discord</a>
+        </div>
+
+        <div class="community-rules">
+            <h3>Community Rules</h3>
+            <ul>
+                <li>Be nice</li>
+                <li>No spam</li>
+                <li>Have fun</li>
+            </ul>
+        </div>
+
+        <div class="watermark">
+            Made with love via guffgaff
+        </div>
+    </div>
+</body>
+
+</html>

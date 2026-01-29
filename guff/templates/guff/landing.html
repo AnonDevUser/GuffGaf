@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuffGaf - All of Your Communities</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <script src="{% static 'script.js' %}" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="landing-page">
+    <!-- Navbar -->
+    <nav class="landing-nav">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="GuffGaf" class="nav-logo">
+        </div>
+
+        <button class="hamburger-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-pill">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="/signup" class="join-free">Join Free</a>
+            <a href="/login">Sign in</a>
+        </div>
+    </nav>
+
+
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-titles">
+            <h1>Nepali ko Lagi GuffGaf</h1>
+            <h2>Monetize your social media channels</h2>
+        </div>
+        <p>Accept payments via Nepal channels and automatically manage Discord or WhatsApp members.</p>
+
+        <a href="/signup" class="cta-btn-large">Join For Free!</a>
+
+        <div class="hero-mountains">
+            <!-- Background mountain graphic handled via CSS on hero-section or separate element -->
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h3>Features</h3>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <h4>Easy Integration</h4>
+                <p>GuffGaf integration is straightforward, and if you face hiccups our support team will be with you!
+                </p>
+            </div>
+
+            <div class="feature-card reveal">
+                    <img class="feature-image" src="{% static 'images/seam_integration.png' %}">
+            </div>
+
+            <div class="feature-card reveal">
+                <h4>Free Landing Page</h4>
+                <p>All users get a free landing page with custom URL showcasing your communities.</p>
+            </div>
+
+            <div class="feature-card reveal">
+                 <img class="feature-image" src="{% static 'images/free_page.png' %}">
+            </div>
+
+            <div class="feature-card reveal">
+                <h4>0% Fee | FREE</h4>
+                <p>We have no hidden charges, you get everything you make!</p>
+            </div>
+
+            <div class="feature-card reveal">
+                <img class="feature-image" src="{% static 'images/zero.png' %}">
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <h3>Pricing</h3>
+        <p class="pricing-subtitle">Free for the first 1000 Creators!</p>
+
+        <div class="pricing-cards">
+            <div class="price-card free-tier">
+                <div class="price-header">
+                    <h4>Free</h4>
+                    <h2>Rs. 0</h2>
+                </div>
+                <ul>
+                    <li>Automated Membership</li>
+                    <li>Landing Page</li>
+                    <li>Upto 1 Community</li>
+                    <li>Analytics</li>
+                    <li>Membership form</li>
+                </ul>
+                <a href="#" class="cta-btn small">Join</a>
+            </div>
+
+            <div class="price-card pro-tier">
+                <div class="price-header">
+                    <h4>Pro</h4>
+                    <h2>Rs. 500</h2>
+                </div>
+                <ul>
+                    <li>Everything in Free+</li>
+                    <li>All available community options</li>
+                    <li>Analytics</li>
+                    <li>Membership form</li>
+                    <li>More coming soon</li>
+                </ul>
+                <a href="#" class="cta-btn small">Join</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <h3>FAQ</h3>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">Why do I need GuffGaf? <span>+</span></div>
+                <div class="faq-answer">GuffGaf simplifies monetizing your community by integrating local payment
+                    methods like eSewa and Khalti directly with Discord and WhatsApp.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How does it work? <span>+</span></div>
+                <div class="faq-answer">You create a landing page, set your pricing, and share the link. When members
+                    pay, they are automatically added to your private channels.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How much do I have to pay? <span>+</span></div>
+                <div class="faq-answer">It's free for the first 1000 creators! After that, we offer a simple monthly
+                    subscription model.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Will there be more app integration? <span>+</span></div>
+                <div class="faq-answer">Yes! We are constantly working on adding more integrations like Telegram and
+                    Slack in the future.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How safe is my money? <span>+</span></div>
+                <div class="faq-answer">Your payments are processed securely through established gateways like eSewa and
+                    Khalti. We don't store your sensitive banking info.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What is the paying gateway for this? <span>+</span></div>
+                <div class="faq-answer">We currently support eSewa and Khalti, the most popular digital wallets in
+                    Nepal.</div>
+            </div>
+        </div>
+
+        <!-- Ready CTA Section -->
+        <section class="ready-cta">
+            <h3>Ready to start?</h3>
+            <a href="/signup" class="cta-btn-large">Join For Free!</a>
+        </section>
+
+        <!-- Jump to Top Button -->
+        <button id="jump-to-top" class="jump-to-top" aria-label="Jump to top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+</body>
+<footer>
+    <p class="footer"> &#169; GuffGaf 2026</p>
+</footer>
+
+</html>

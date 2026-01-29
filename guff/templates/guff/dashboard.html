@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GuffGaf</title>
+     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <a href="{% url 'landing' %}"><img src="{% static 'images/logo-dark.png' %}" alt="GuffGaf"></a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="icon"></span> Design
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon"></span> Revenue
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon"></span> Subscribers
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon"></span> Analytics
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon"></span> Links
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon"></span> Settings
+                </a>
+            </nav>
+            <a href="#" class="upgrade-btn">upgrade</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Design</h2>
+                <div class="share-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                        <polyline points="16 6 12 2 8 6"></polyline>
+                        <line x1="12" y1="2" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+            </header>
+
+            <div class="content-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Title" class="dashboard-input">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Description" class="dashboard-input">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="url description" class="dashboard-input">
+                </div>
+                <button class="save-btn">Save Changes</button>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
