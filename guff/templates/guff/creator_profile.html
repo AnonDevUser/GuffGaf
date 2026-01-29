@@ -16,7 +16,10 @@
     <div class="profile-container">
         <div class="profile-header">
             <div class="avatar-large"></div>
-            <h2>Aaren's Community</h2>
+            <!-- need fixing-->
+            {% if user %}
+            <h2> {{ user.username }} Community</h2>
+            {% endif %}
             <p>The most quoted community in the market of the most popular nepali content creator, multi billionaire</p>
             <a href="{% url 'landing' %}"><p class="author-tag">By @GuffGaf</p></a>
         </div>
@@ -36,7 +39,7 @@
         </div>
 
         <div class="watermark">
-            Made with love via guffgaff
+          guffgaff
         </div>
     </div>
 </body>
