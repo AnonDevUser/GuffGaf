@@ -9,6 +9,6 @@ urlpatterns = [
     path('contacts', views.contacts, name="contacts"),
     path('dashboard', views.dashboard, name="dashboard"),
     path('', views.landing, name="landing"),
-    path('profile', views.creator_profile, name="creator_profile"),
+    path('profile/<str:username>', views.creator_profile, name="creator_profile"),
     path('subscription', views.subscription, name="subscription"),
 ]
