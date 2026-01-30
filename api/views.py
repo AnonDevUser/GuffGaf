@@ -122,8 +122,28 @@ def get_payment(request, id):
     ...
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def linkdiscord(request):
-    ...
+    creator = get_object_or_404(UserProfile, user=request.user)
+
+    if not creator.is_creator:
+        return Response({"error": "not authorized"}, status=403)
+
+    plan_id = request.data.get("plan_id")
+    if not plan_id:
+        return Response({"error": "plan_id is required"}, status=400)
+
+    plan = get_object_or_404(
+        SubscriptionPlan,
+        id=plan_id,
+        creator=creator
+    )
+
+    serializer = DiscordSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save(plan=plan)
+
+    return Response(serializer.data, status=201) 
 
 @api_view(['POST'])
 def syncdiscord(request):
@@ -134,7 +154,34 @@ def unlinkdiscord(request):
     ...
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def linkwhatsapp(request):
+    """
+    Links WhatsApp group to a creator's plan
+    """
+    creator = get_object_or_404(UserProfile, user=request.user)
+
+    if not creator.is_creator:
+        return Response({"error": "not authorized"}, status=403)
+
+    plan_id = request.data.get("plan_id")
+    if not plan_id:
+        return Response({"error": "plan_id is required"}, status=400)
+
+    plan = get_object_or_404(
+        SubscriptionPlan,
+        id=plan_id,
+        creator=creator
+    )
+
+    serializer = WhatsAppSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save(plan=plan)
+
+    return Response(serializer.data, status=201)
+
+@api_view(['DELETE'])
+def unlinkwhatsapp(request):
     ...
 
 @api_view(['GET'])
