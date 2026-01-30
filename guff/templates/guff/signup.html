@@ -8,7 +8,7 @@
     <title>Sign Up - GuffGaf</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <script src="{% static 'script.js' %}" defer></script>
-     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
     <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 </head>
@@ -19,15 +19,22 @@
             <a href="{% url 'landing' %}"><img src="{% static 'images/logo-dark.png' %}" alt="Logo"></a>
         </div>
         <h1>Join For Free</h1>
-        <form class="auth-form">
-            <input type="email" placeholder="example@email.com" required>
-            <input type="text" placeholder="username" required>
-            <input type="text" placeholder="+977 9800000000" required>
-            <input type="password" placeholder="password" required>
-            <input type="password" placeholder="re-enter password" required>
+        <form class="auth-form" id="signup-form" method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div id="signup-error" class="error-box"></div>
+            <input type="text" placeholder="username" name="username" id="username" required>
+            <input type="text" placeholder="+977 9800000000" name="phone" id="phone" required>
+            <input type="password" placeholder="password" name="password" id="password" required>
+            <input type="password" placeholder="re-enter password" name="confirmed_password" id="confirmed_password"
+                required>
+
+            <div class="creator-choice">
+                <input type="checkbox" name="is_creator" id="is_creator">
+                <label for="is_creator">I am a content creator</label>
+            </div>
 
             <div class="form-footer">
-                <a href="#" class="forgot-password">already have an account? login</a>
+                <a href="{% url 'login' %}" class="forgot-password">already have an account? login</a>
             </div>
 
             <button type="submit" class="btn-primary">sign up</button>
