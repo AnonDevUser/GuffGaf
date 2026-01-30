@@ -8,11 +8,13 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['username']
 
 class DiscordSerializer(serializers.ModelSerializer):
+    plan_id = serializers.CharField(source="plan.id", read_only=True)
     class Meta:
         model = DiscordIntegration
-        fields = ['guild_id', 'role_id']
+        fields = ['plan_id', 'guild_id', 'role_id']
 
 class WhatsAppSerializer(serializers.ModelSerializer):
+    plan_id = serializers.CharField(source="plan.id", read_only=True)
     class Meta:
         model = WhatsAppIntegration 
-        fields = ['group_link']
+        fields = ['plan_id', 'group_link']
