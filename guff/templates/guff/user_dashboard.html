@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GuffGaf</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="user-dashboard-page">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <a href="{% url 'landing' %}"><img src="{% static 'images/logo-dark.png' %}" alt="Logo"></a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i>🏠</i> Overview
+                </a>
+                <a href="#" class="nav-item">
+                    <i>📦</i> Subscriptions
+                </a>
+                <a href="#" class="nav-item">
+                    <i>👤</i> Profile
+                </a>
+                <form action="{% url 'logout' %}" method="post" style="margin-top: auto;">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-item logout-btn"
+                        style="background: none; border: none; width: 100%; cursor: pointer; text-align: left;">
+                        <i>🚪</i> Sign Out
+                    </button>
+                </form>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h2>Welcome, {{ profile.user.username }}!</h2>
+            </header>
+
+            <section class="profile-card-horizontal reveal active">
+                <div class="profile-info">
+                    <div class="avatar-small"></div>
+                    <div class="profile-text">
+                        <h3>{{ profile.user.get_full_name|default:profile.user.username }}</h3>
+                        <p>{{ profile.phone_number }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="subscriptions-section">
+                <h3>My Subscriptions</h3>
+                <div class="subscriptions-grid">
+                    {% for sub in subscriptions %}
+                    <div class="sub-card reveal active">
+                        <div class="sub-header">
+                            <h4>{{ sub.plan.name }}</h4>
+                            <span class="creator-tag">by {{ sub.plan.creator.user.username }}</span>
+                        </div>
+                        <div class="sub-body">
+                            <p class="price">Rs. {{ sub.plan.price }}</p>
+                            <p class="interval">/ {{ sub.plan.get_interval_display }}</p>
+                            <p class="expiry">Expires: {{ sub.end_date|date:"M d, Y"|default:"Active" }}</p>
+                        </div>
+                        <div class="sub-footer">
+                            <a href="#" class="btn-sm">View Content</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="empty-state">
+                        <p>You haven't subscribed to any creators yet.</p>
+                        <a href="{% url 'landing' %}" class="btn-primary"
+                            style="width: auto; margin-top: 20px; display: inline-block;">Discover Creators</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
