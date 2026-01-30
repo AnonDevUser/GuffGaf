@@ -46,7 +46,10 @@
                 </a>
             </nav>
             <a href="#" class="upgrade-btn">upgrade</a>
-            <a href="{% url 'logout' %}" class="upgrade-btn">logout</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="upgrade-btn">logout</button>
+            </form>
 
         </aside>
 
