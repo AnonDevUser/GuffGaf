@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
         initDashboard(apiClient);
     }
 
+    // Signup Logic
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+        initSignup(apiClient);
+    }
+
     // Creator Profile Logic
     const profilePage = document.querySelector('.profile-page');
     if (profilePage) {
@@ -50,6 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const authForms = document.querySelectorAll('.auth-form, .contact-form');
 
     authForms.forEach(form => {
+        // Skip forms handled by AJAX logic to avoid conflict
+        if (form.id === 'signup-form' || form.classList.contains('content-form')) return;
+
         form.addEventListener('submit', (e) => {
             const submitBtn = form.querySelector('button[type="submit"]');
             if (submitBtn) {
@@ -229,4 +238,84 @@ function renderPlans(container, plans, isDashboard = false) {
         list.appendChild(card);
     });
     container.appendChild(list);
+}
+
+async function initSignup(apiClient) {
+    const signupForm = document.getElementById('signup-form');
+    const errorBox = document.getElementById('signup-error');
+    const submitBtn = signupForm.querySelector('button[type="submit"]');
+
+    function showError(message) {
+        submitBtn.classList.remove('loading');
+        errorBox.textContent = message;
+        errorBox.classList.add('show');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function hideError() {
+        errorBox.textContent = '';
+        errorBox.classList.remove('show');
+    }
+
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const formData = new FormData(signupForm);
+        const data = Object.fromEntries(formData.entries());
+
+        // Basic Validation
+        if (data.username.length < 3) {
+            return showError('username must be at least 3 characters');
+        }
+
+        if (data.password.length < 6) {
+            return showError('password must be at least 6 characters');
+        }
+
+        if (data.password !== data.confirmed_password) {
+            return showError('passwords do not match');
+        }
+
+        // Phone validation (basic)
+        const phoneRegex = /^(\+977)?[9][6-8][0-9]{8}$/;
+        if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
+            return showError('invalid Nepal phone number format');
+        }
+
+        submitBtn.classList.add('loading');
+
+        try {
+            // We use request but handle the redirect manually if needed, 
+            // or let the backend return a JSON response for AJAX.
+            // Current views.py signup returns redirect on success, we need to handle that.
+
+            const response = await fetch(signupForm.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': apiClient.getCookie('csrftoken'),
+                },
+                body: formData // Send as FormData to match standard Django POST
+            });
+
+            if (response.ok) {
+                // If the response is a redirect (status 200 after following), 
+                // but fetch might follow it. Let's check the URL.
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    // If not redirected but OK, maybe it's the dashboard already or success JSON
+                    window.location.href = '/dashboard';
+                }
+            } else {
+                const result = await response.json().catch(() => ({ error: 'signup failed' }));
+                showError(result.error || result.message || 'an error occurred');
+            }
+        } catch (err) {
+            showError('network error, please try again');
+            console.error(err);
+        } finally {
+            submitBtn.classList.remove('loading');
+        }
+    });
 }
