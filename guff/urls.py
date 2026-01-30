@@ -10,5 +10,6 @@ urlpatterns = [
     path('dashboard', views.dashboard, name="dashboard"),
     path('', views.landing, name="landing"),
     path('profile/<str:username>', views.creator_profile, name="creator_profile"),
+    path('user/dashboard', views.user_dashboard, name="user_dashboard"),
     path('subscription', views.subscription, name="subscription"),
 ]
