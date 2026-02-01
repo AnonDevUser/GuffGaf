@@ -149,7 +149,7 @@ def linkdiscord(request):
 def syncdiscord(request):
     ...
 
-@api_view(['DELETE'])
+@api_view(['UPDATE'])
 def unlinkdiscord(request):
     ...
 
@@ -180,7 +180,7 @@ def linkwhatsapp(request):
 
     return Response(serializer.data, status=201)
 
-@api_view(['DELETE'])
+@api_view(['UPDATE'])
 def unlinkwhatsapp(request):
     ...
 
