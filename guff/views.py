@@ -122,7 +122,7 @@ def dashboard(request):
     if creator.is_creator:
         return render(request, 'guff/dashboard.html')
     else:
-        return redirect('landing')
+        return redirect('user_dashboard')
 
 def landing(request):
     return render(request, "guff/landing.html")
