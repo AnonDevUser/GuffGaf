@@ -9,6 +9,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_creator = models.BooleanField(default=False, db_index=True)
     phone_number = models.CharField(max_length=15)
+    discord_id = models.CharField(max_length=18, default="0")
 
     def __str__(self):
         return self.user.username
