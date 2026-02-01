@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - GuffGaf</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .minimal-content {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .minimal-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .minimal-content h2 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .minimal-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: #007bff;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body class="auth-page">
+    <div class="minimal-content">
+        <div class="logo-small" style="text-align: center;">
+            <a href="{% url 'landing' %}"><img src="{% static 'images/logo-dark.png' %}" alt="Logo"
+                    style="height: 50px;"></a>
+        </div>
+        <h1>Privacy Policy</h1>
+
+        <p>At GuffGaf, we value your privacy. This policy explains how we collect and use your information.</p>
+
+        <h2>1. Information We Collect</h2>
+        <p>We collection information you provide when creating an account, such as your username, phone number, and
+            password. We also collect data related to your subscriptions and transactions.</p>
+
+        <h2>2. How We Use Information</h2>
+        <p>We use your information to provide and improve our services, facilitate payments, and communicate with you
+            about your account.</p>
+
+        <h2>3. Data Security</h2>
+        <p>We take reasonable measures to protect your information from unauthorized access or disclosure. However, no
+            method of transmission over the internet is 100% secure.</p>
+
+        <h2>4. Sharing Information</h2>
+        <p>We do not share your personal information with third parties except as necessary to provide our services
+            (e.g., with payment processors) or as required by law.</p>
+
+        <h2>5. Your Choices</h2>
+        <p>You can update your account information at any time through your dashboard.</p>
+
+        <a href="{% url 'landing' %}" class="back-link">← Back to Home</a>
+    </div>
+</body>
+
+</html>

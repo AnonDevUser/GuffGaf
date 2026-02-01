@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - GuffGaf</title>
-     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Same+One&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -36,7 +36,8 @@
 
             <button type="submit" class="btn-primary">send</button>
 
-            <p class="terms-text"><a href="#">upload privacy</a> | <a href="#">terms</a><br><a href="#">or contact
+            <p class="terms-text"><a href="{% url 'privacy' %}">privacy</a> | <a href="{% url 'tos' %}">terms</a><br><a
+                    href="{% url 'contacts' %}">or contact
                     us</a></p>
         </form>
     </div>

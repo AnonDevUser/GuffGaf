@@ -63,7 +63,7 @@
             </div>
 
             <div class="feature-card reveal">
-                    <img class="feature-image" src="{% static 'images/seam_integration.png' %}">
+                <img class="feature-image" src="{% static 'images/seam_integration.png' %}">
             </div>
 
             <div class="feature-card reveal">
@@ -72,7 +72,7 @@
             </div>
 
             <div class="feature-card reveal">
-                 <img class="feature-image" src="{% static 'images/free_page.png' %}">
+                <img class="feature-image" src="{% static 'images/free_page.png' %}">
             </div>
 
             <div class="feature-card reveal">
@@ -175,7 +175,9 @@
         </button>
 </body>
 <footer>
-    <p class="footer"> &#169; GuffGaf 2026</p>
+    <p class="footer"> &#169; GuffGaf 2026 | <a href="{% url 'tos' %}"
+            style="color: inherit; text-decoration: underline;">Terms</a> | <a href="{% url 'privacy' %}"
+            style="color: inherit; text-decoration: underline;">Privacy</a></p>
 </footer>
 
 </html>

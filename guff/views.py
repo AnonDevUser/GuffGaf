@@ -145,3 +145,9 @@ def subscription(request):
         })
     else:
         return redirect('dashboard')
+
+def tos(request):
+    return render(request, "guff/tos.html")
+
+def privacy(request):
+    return render(request, "guff/privacy.html")

@@ -12,4 +12,6 @@ urlpatterns = [
     path('profile/<str:username>', views.creator_profile, name="creator_profile"),
     path('user/dashboard', views.user_dashboard, name="user_dashboard"),
     path('subscription', views.subscription, name="subscription"),
+    path('tos', views.tos, name="tos"),
+    path('privacy', views.privacy, name="privacy"),
 ]
