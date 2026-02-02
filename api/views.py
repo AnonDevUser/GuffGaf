@@ -153,7 +153,7 @@ def initiate_payment(request):
         status='PENDING'
     )
     
-    if gateway == 'ES':
+    if gateway == 'ES': #only esewa used rn
         # eSewa v2 parameters
         # For Sandbox:
         secret_key = "8gBm/:&EnhH.1/q"
@@ -186,7 +186,8 @@ def initiate_payment(request):
             "esewa_url": "https://rc-epay.esewa.com.np/api/epay/main/v2/form"
         }, status=200)
 
-    return Response({"error": "Gateway not supported"}, status=400)
+    return Response({"error": "Gateway not supported"}, status=400) 
+    #just in case other gateways are used eg: khalti
 
 @api_view(['GET', 'POST']) # eSewa redirects with GET
 def esewa_hook(request):
