@@ -228,9 +228,6 @@ def esewa_hook(request):
         
     return redirect('landing')
 
-@api_view(['POST'])
-def verify_payment(request):
-    ...
 
 @api_view(['GET'])
 def get_payment(request, id):
