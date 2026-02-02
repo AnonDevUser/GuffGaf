@@ -574,4 +574,54 @@ async function initCreatorProfileV2(apiClient) {
         if (loader) loader.style.display = 'none';
         if (content) content.classList.remove('is-loading');
     }
+
+    // eSewa Subscribe Action
+    const subscribeBtn = document.getElementById('subscribe-btn');
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', async () => {
+            subscribeBtn.classList.add('loading');
+            subscribeBtn.disabled = true;
+
+            try {
+                const data = await apiClient.request('/api/payments/initiate/', {
+                    method: 'POST',
+                    body: JSON.stringify({ plan_id: planId, gateway: 'ES' })
+                });
+
+                // Create hidden eSewa form
+                const form = document.createElement('form');
+                form.setAttribute('method', 'POST');
+                form.setAttribute('action', data.esewa_url);
+
+                const params = {
+                    amount: data.amount,
+                    tax_amount: data.tax_amount,
+                    total_amount: data.total_amount,
+                    transaction_uuid: data.transaction_uuid,
+                    product_code: data.product_code,
+                    product_service_charge: data.product_service_charge,
+                    product_delivery_charge: data.product_delivery_charge,
+                    success_url: data.success_url,
+                    failure_url: data.failure_url,
+                    signed_field_names: data.signed_field_names,
+                    signature: data.signature
+                };
+
+                for (const key in params) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.setAttribute('type', 'hidden');
+                    hiddenField.setAttribute('name', key);
+                    hiddenField.setAttribute('value', params[key]);
+                    form.appendChild(hiddenField);
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+            } catch (err) {
+                alert('Payment Initiation Failed: ' + err.message);
+                subscribeBtn.classList.remove('loading');
+                subscribeBtn.disabled = false;
+            }
+        });
+    }
 }

@@ -22,8 +22,8 @@ urlpatterns = [
     path("integrations/discord/unlink/", views.unlinkdiscord),
     path("integrations/whatsapp/link/", views.linkwhatsapp),
     path("integrations/whatsapp/unlink/", views.unlinkwhatsapp),
-    path("integrations/whatsapp/invite/<str:subscription_id>/", views.getinvite),
+   # path("integrations/whatsapp/invite/<str:subscription_id>/", views.getinvite),
     #payment webhooks
     path("webhook/esewa/", views.esewa_hook),
-    path('webhook/khalti/', views.khalti_hook)
+  #  path('webhook/khalti/', views.khalti_hook)
 ]

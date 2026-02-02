@@ -1,11 +1,19 @@
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from guff.models import UserProfile, SubscriptionPlan, UserSubscription
+from guff.models import UserProfile, SubscriptionPlan, UserSubscription, Payment
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
 from .serializers import ProfileSerializer, DiscordSerializer, WhatsAppSerializer
-from django.shortcuts import get_object_or_404
 from .subscription_serializers import UserSubSerializer, PlanSerializer, PaymentSerializer 
+
+import hmac
+import hashlib
+import base64
+import uuid
+import json
+from datetime import timedelta
 
 @api_view(['GET'])
 def test(request):
@@ -122,8 +130,103 @@ def cancel_sub(request, id):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def initiate_payment(request):
-    ...
+    """
+    Initiates payment and returns eSewa form parameters
+    """
+    user = get_object_or_404(UserProfile, user=request.user)
+    plan_id = request.data.get('plan_id')
+    gateway = request.data.get('gateway', 'ES') 
+
+    plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+    
+    transaction_uuid = str(uuid.uuid4())
+    
+    # Create pending payment
+    payment = Payment.objects.create(
+        buyer=user,
+        plan=plan,
+        amount=plan.price,
+        gateway=gateway,
+        transaction_id=transaction_uuid,
+        status='PENDING'
+    )
+    
+    if gateway == 'ES':
+        # eSewa v2 parameters
+        # For Sandbox:
+        secret_key = "8gBm/:&EnhH.1/q"
+        product_code = "EPAYTEST"
+        
+        # message = "total_amount,transaction_uuid,product_code"
+        # Ensure total_amount is formatted correctly (no trailing zeros ideally, but let's see)
+        total_amount = str(int(plan.price)) # Assuming integer prices for now, or use format
+        
+        message = f"total_amount={plan.price},transaction_uuid={transaction_uuid},product_code={product_code}"
+        
+        # Generate HMAC-SHA256 signature
+        key = bytes(secret_key, 'utf-8')
+        message_bytes = bytes(message, 'utf-8')
+        hash_obj = hmac.new(key, message_bytes, hashlib.sha256)
+        signature = base64.b64encode(hash_obj.digest()).decode('utf-8')
+        
+        return Response({
+            "amount": str(plan.price),
+            "tax_amount": "0",
+            "total_amount": str(plan.price),
+            "transaction_uuid": transaction_uuid,
+            "product_code": product_code,
+            "product_service_charge": "0",
+            "product_delivery_charge": "0",
+            "success_url": request.build_absolute_uri('/api/webhook/esewa/'),
+            "failure_url": request.build_absolute_uri('/payment-failure/'),
+            "signed_field_names": "total_amount,transaction_uuid,product_code",
+            "signature": signature,
+            "esewa_url": "https://rc-epay.esewa.com.np/api/epay/main/v2/form"
+        }, status=200)
+
+    return Response({"error": "Gateway not supported"}, status=400)
+
+@api_view(['GET', 'POST']) # eSewa redirects with GET
+def esewa_hook(request):
+    """
+    Handles eSewa success redirect and verifies payment
+    """
+    # eSewa v2 sends encoded response in 'data' parameter
+    data = request.GET.get('data')
+    if not data:
+        return Response({"error": "No data received"}, status=400)
+    
+    # Decode base64 data
+    decoded_data = json.loads(base64.b64decode(data).decode('utf-8'))
+    
+    transaction_uuid = decoded_data.get('transaction_uuid')
+    status = decoded_data.get('status')
+    
+    payment = get_object_or_404(Payment, transaction_id=transaction_uuid)
+    
+    if status == 'COMPLETE':
+        payment.status = 'COMPLETED'
+        payment.save()
+        
+        # Active subscription
+        plan = payment.plan
+        buyer = payment.buyer
+        
+        # Calculate end_date (e.g., 30 days)
+        end_date = timezone.now() + timedelta(days=30)
+        
+        UserSubscription.objects.update_or_create(
+            buyer=buyer,
+            plan=plan,
+            defaults={'is_active': True, 'end_date': end_date}
+        )
+        
+        # Redirect to success page (template view)
+        return redirect('success')
+        
+    return redirect('landing')
 
 @api_view(['POST'])
 def verify_payment(request):
@@ -131,7 +234,8 @@ def verify_payment(request):
 
 @api_view(['GET'])
 def get_payment(request, id):
-    ...
+    payment = get_object_or_404(Payment, id=id)
+    return Response(PaymentSerializer(payment).data, status=200)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -220,14 +324,3 @@ def unlinkwhatsapp(request):
         return Response({"message": "WhatsApp unlinked successfully"}, status=200)
     return Response({"error": "No whatsapp integration found"}, status=404)
 
-@api_view(['GET'])
-def getinvite(request, subscription_id):
-    ...
-
-@api_view(['POST'])
-def esewa_hook(request):
-    ...
-
-@api_view(['POST'])
-def khalti_hook(request):
-    ...
