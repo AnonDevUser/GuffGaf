@@ -161,6 +161,12 @@ def privacy(request):
 
 @login_required(login_url='login')
 def success(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+    from .models import UserSubscription
+    latest_sub = UserSubscription.objects.filter(buyer=profile, is_active=True).select_related('plan__creator__user').last()
+    
+    creator_username = latest_sub.plan.creator.user.username if latest_sub else request.user.username
+    
     return render(request, "guff/success.html", {
-        "user":request.user
+        "creator_username": creator_username
     })
