@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Complete - GuffGaf</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="success-page">
+    <div class="success-wrapper">
+        <header class="success-header">
+            <img src="{% static 'images/logo.png' %}" alt="GuffGaf" class="success-logo">
+        </header>
+
+        <main class="success-content">
+            <div class="success-card">
+                <div class="checkmark-circle">
+                    <svg class="checkmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <!--{{ user.username }} will be replaced to actual plan's creator username-->
+                <h1 class="success-title">Purchase for {{ user.username }}’s Community was successful</h1>
+                <p class="success-subtitle">Invitation sent to your email</p>
+            </div>
+        </main>
+
+        <footer class="success-footer">
+            <div class="footer-links">
+                <a href="{% url 'tos' %}">terms</a> |
+                <a href="{% url 'privacy' %}">privacy</a> |
+                <a href="{% url 'contacts' %}">contact</a>
+            </div>
+            <p class="copyright">© GuffGaf 2025</p>
+        </footer>
+    </div>
+</body>
+
+</html>

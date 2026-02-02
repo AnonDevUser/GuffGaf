@@ -14,4 +14,5 @@ urlpatterns = [
     path('subscription', views.subscription, name="subscription"),
     path('tos', views.tos, name="tos"),
     path('privacy', views.privacy, name="privacy"),
+    path('success', views.success, name="success"),
 ]

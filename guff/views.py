@@ -151,3 +151,9 @@ def tos(request):
 
 def privacy(request):
     return render(request, "guff/privacy.html")
+
+@login_required(login_url='login')
+def success(request):
+    return render(request, "guff/success.html", {
+        "user":request.user
+    })

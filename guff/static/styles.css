@@ -1372,3 +1372,111 @@ ul {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     outline: none;
 }
+/* Success Page */
+.success-page {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.success-wrapper {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.success-logo {
+    height: 60px;
+    margin-bottom: 40px;
+}
+
+.success-card {
+    background-color: #111;
+    color: #fff;
+    padding: 60px 40px;
+    border-radius: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.checkmark-circle {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.checkmark-icon {
+    width: 50px;
+    height: 50px;
+    color: #22c55e;
+}
+
+.success-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.success-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 0;
+}
+
+.success-footer {
+    margin-top: 60px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #000;
+}
+
+.copyright {
+    color: #94a3b8;
+}
+
+@media (max-width: 480px) {
+    .success-card {
+        padding: 40px 20px;
+    }
+    .success-title {
+        font-size: 1.25rem;
+    }
+    .checkmark-circle {
+        width: 80px;
+        height: 80px;
+    }
+    .checkmark-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
