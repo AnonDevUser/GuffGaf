@@ -14,7 +14,7 @@ urlpatterns = [
     path('subscriptions/<str:id>/', views.cancel_sub),
     #payment 
     path("payments/initiate/", views.initiate_payment),
-    path("payments/verify/", views.verify_payment),
+   # path("payments/verify/", views.verify_payment),
     path("payments/<str:id>/", views.get_payment),
     #discord and whatsapp integration
     path("integrations/discord/link/", views.linkdiscord),
