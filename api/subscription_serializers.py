@@ -32,6 +32,9 @@ class UserSubSerializer(serializers.ModelSerializer):
 
 class PlanSerializer(serializers.ModelSerializer):
     creator = serializers.CharField(source="creator.user.username", read_only=True)
+    discord_state = serializers.SerializerMethodField()
+    whatsapp_state = serializers.SerializerMethodField()
+
     class Meta:
         model = SubscriptionPlan
         fields = [
@@ -40,9 +43,28 @@ class PlanSerializer(serializers.ModelSerializer):
                 'subscription_bio', 
                 'name', 
                 'price', 
-                'interval'
+                'interval',
+                'discord_state',
+                'whatsapp_state'
             ]
         read_only_fields = ['id', 'creator']
+    
+    def get_discord_state(self, obj):
+        return hasattr(obj, 'discord')
+    
+    def get_whatsapp_state(self, obj):
+        return hasattr(obj, 'whatsapp')
+    
+    def validate(self, attrs):
+        if self.instance is None:
+            creator = self.context.get('creator')
+            if creator and hasattr(creator, "plan"):
+                raise serializers.ValidationError({
+                    "detail": "You already have a subscription plan."
+                })
+
+        return attrs
+
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:

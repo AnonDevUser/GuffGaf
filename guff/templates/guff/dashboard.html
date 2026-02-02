@@ -21,31 +21,16 @@
                 <a href="{% url 'landing' %}"><img src="{% static 'images/logo-dark.png' %}" alt="GuffGaf"></a>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
+                <a href="#" class="nav-item active" data-nav="design">
                     <span class="icon"></span> Design
                 </a>
-                {% if request.user.is_authenticated %}
-                <a href="#" class="nav-item">
-                    <span class="icon"></span> {{ request.user.username }}
+                <a href="#" class="nav-item" data-nav="discord">
+                    <span class="icon"></span> Connect Discord
                 </a>
-                {% endif %}
-                <a href="#" class="nav-item">
-                    <span class="icon"></span> Revenue
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="icon"></span> Subscribers
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="icon"></span> Analytics
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="icon"></span> Links
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="icon"></span> Settings
+                <a href="#" class="nav-item" data-nav="whatsapp">
+                    <span class="icon"></span> Connect WhatsApp
                 </a>
             </nav>
-            <a href="#" class="upgrade-btn">upgrade</a>
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="upgrade-btn">logout</button>
@@ -66,20 +51,104 @@
                 </div>
             </header>
 
-            <div class="content-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Title" class="dashboard-input">
+            <div id="design-section">
+                {% if plan_id %}
+                <div class="active-plan-card">
+                    <div class="plan-info-v2">
+                        <span class="plan-status-tag">Active Plan</span>
+                        <h3 id="display-plan-name">Loading...</h3>
+                        <p id="display-plan-bio">Loading...</p>
+                        <div class="plan-price-tag">Rs. <span id="display-plan-price">...</span></div>
+                    </div>
+                    <button class="edit-plan-btn" id="open-edit-plan-modal">Edit Plan</button>
                 </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Description" class="dashboard-input">
+                {% else %}
+                <div class="content-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Title" class="dashboard-input" id="plan-title">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Description" class="dashboard-input" id="plan-description">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" placeholder="Price (NPR)" class="dashboard-input" id="plan-price">
+                    </div>
+                    <button class="save-btn" id="save-plan-btn">Create Plan</button>
                 </div>
-                <div class="form-group">
-                    <input type="text" placeholder="url description" class="dashboard-input">
-                </div>
-                <button class="save-btn">Save Changes</button>
+                {% endif %}
             </div>
         </main>
     </div>
+
+    <!-- Edit Plan Modal -->
+    <div id="edit-plan-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Edit Plan Details</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Plan Name</label>
+                    <input type="text" id="edit-plan-title" class="dashboard-input">
+                </div>
+                <div class="form-group">
+                    <label>Description (Bio)</label>
+                    <input type="text" id="edit-plan-description" class="dashboard-input">
+                </div>
+                <div class="form-group">
+                    <label>Price (NPR)</label>
+                    <input type="number" id="edit-plan-price" class="dashboard-input">
+                </div>
+                <button class="save-btn" id="update-plan-btn">Update Plan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord Modal -->
+    <div id="discord-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Connect Discord</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-hint">Provide your Discord Server (Guild) ID and the Role ID to grant to subscribers.
+                </p>
+                <div class="form-group">
+                    <input type="text" id="discord-guild-id" placeholder="Guild ID" class="dashboard-input">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="discord-role-id" placeholder="Role ID" class="dashboard-input">
+                </div>
+                <button class="save-btn" id="save-discord-btn">Link Discord</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Modal -->
+    <div id="whatsapp-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Connect WhatsApp</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-hint">Paste your WhatsApp Group Invitation Link below.</p>
+                <div class="form-group">
+                    <input type="url" id="whatsapp-link" placeholder="https://chat.whatsapp.com/..."
+                        class="dashboard-input">
+                </div>
+                <button class="save-btn" id="save-whatsapp-btn">Link WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.DASHBOARD_DATA = {
+            planId: "{{ plan_id|default:'' }}"
+        };
+    </script>
 </body>
 
 </html>

@@ -57,22 +57,34 @@ def plans(request):
     if not creator_profile.is_creator:
         return Response({'error': 'user is not a creator'}, status=403)
 
-    serializer = PlanSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)  
-    serializer.save(creator=creator_profile)
-    return Response(serializer.data, status=201)
+    serializer = PlanSerializer(data=request.data, context={'creator': creator_profile})
+    if serializer.is_valid():
+        serializer.save(creator=creator_profile)  
+        return Response(serializer.data, status=201)
+    else:
+        return Response(serializer.errors, status=400)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PATCH'])
 @permission_classes([IsAuthenticated])
 def plan_details(request, plan_id):
     """
-    returns details of specified plan
-    
-    :param plan_id: id of plan to be searched
+    returns details of specified plan or updates it
     """
     plan = get_object_or_404(SubscriptionPlan, id=plan_id)
-    return Response(PlanSerializer(plan).data, status=200)
+    
+    if request.method == 'GET':
+        return Response(PlanSerializer(plan).data, status=200)
+    
+    if request.method == 'PATCH':
+        if plan.creator.user != request.user:
+            return Response({"error": "not authorized"}, status=403)
+            
+        serializer = PlanSerializer(plan, data=request.data, partial=True, context={'creator': plan.creator})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        return Response(serializer.errors, status=400)
 
 @api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
@@ -149,9 +161,21 @@ def linkdiscord(request):
 def syncdiscord(request):
     ...
 
-@api_view(['UPDATE'])
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def unlinkdiscord(request):
-    ...
+    """
+    Unlinks Discord from a creator's plan
+    """
+    creator = get_object_or_404(UserProfile, user=request.user)
+    if not creator.is_creator:
+        return Response({"error": "not authorized"}, status=403)
+
+    plan = get_object_or_404(SubscriptionPlan, creator=creator)
+    if hasattr(plan, 'discord'):
+        plan.discord.delete()
+        return Response({"message": "Discord unlinked successfully"}, status=200)
+    return Response({"error": "No discord integration found"}, status=404)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -180,9 +204,21 @@ def linkwhatsapp(request):
 
     return Response(serializer.data, status=201)
 
-@api_view(['UPDATE'])
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def unlinkwhatsapp(request):
-    ...
+    """
+    Unlinks WhatsApp from a creator's plan
+    """
+    creator = get_object_or_404(UserProfile, user=request.user)
+    if not creator.is_creator:
+        return Response({"error": "not authorized"}, status=403)
+
+    plan = get_object_or_404(SubscriptionPlan, creator=creator)
+    if hasattr(plan, 'whatsapp'):
+        plan.whatsapp.delete()
+        return Response({"message": "WhatsApp unlinked successfully"}, status=200)
+    return Response({"error": "No whatsapp integration found"}, status=404)
 
 @api_view(['GET'])
 def getinvite(request, subscription_id):

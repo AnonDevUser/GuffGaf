@@ -13,37 +13,51 @@
         rel="stylesheet">
 </head>
 
-<body class="profile-page" data-username="{{ user.user.username }}">
-    <div class="profile-container">
-        <div class="profile-header">
-            <div class="avatar-large"></div>
-            {% if user %}
-            <h2> {{ user.user.username }}'s Community</h2>
-            {% endif %}
-            <p>The most quoted community in the market of the most popular nepali content creator, multi billionaire</p>
-            <a href="{% url 'landing' %}">
-                <p class="author-tag">By @GuffGaf</p>
-            </a>
-        </div>
-
-        <div class="community-links">
-            <a href="#" class="community-btn whatsapp">WhatsApp</a>
-            <a href="#" class="community-btn discord">Discord</a>
-        </div>
-
-        <div class="community-rules">
-            <h3>Community Rules</h3>
-            <ul>
-                <li>Be nice</li>
-                <li>No spam</li>
-                <li>Have fun</li>
-            </ul>
-        </div>
-
-        <div class="watermark">
-            guffgaff
-        </div>
+<body class="profile-page-v2" data-plan-id="{{ plan }}">
+    <!-- Loading Screen -->
+    <div id="profile-loader" class="loader-overlay">
+        <div class="spinner"></div>
+        <p>Loading Creator Profile...</p>
     </div>
+
+    <div class="profile-v2-container is-loading" id="profile-content">
+        <!-- Profile Header/Avatar -->
+        <header class="profile-v2-header">
+            <div class="avatar-v2-wrapper">
+                <img id="creator-avatar" src="" alt="Creator" class="avatar-v2-img" style="display: none;">
+                <div id="avatar-placeholder" class="avatar-v2-img" style="background: #eee;"></div>
+            </div>
+            <h1 class="profile-v2-title" id="community-name-title">Loading...</h1>
+            <p class="profile-v2-bio" id="community-bio">Loading community details...</p>
+        </header>
+
+        <!-- Membership Selection -->
+        <section class="membership-v2-section">
+            <div class="membership-v2-card active">
+                <div class="membership-v2-info">
+                    <span class="membership-v2-label" id="plan-name">Membership</span>
+                    <span class="membership-v2-price" id="plan-price-display">Rs. -- /month</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Access Section -->
+        <section class="access-v2-section" id="access-section" style="display: none;">
+            <h3 class="section-v2-label">Access to</h3>
+            <div class="access-v2-links" id="access-links">
+                <!-- Links will be injected here -->
+            </div>
+        </section>
+
+
+        <!-- Action Button -->
+        <footer class="profile-v2-footer">
+            <button class="cta-v2-btn subscribe-esewa-btn" id="subscribe-btn">Subscribe via esewa</button>
+            <div class="v2-watermark">powered by GuffGaf</div>
+        </footer>
+    </div>
+
+
 </body>
 
 </html>

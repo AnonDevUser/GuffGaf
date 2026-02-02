@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, SubscriptionPlan, WhatsAppIntegration, DiscordIntegration
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -120,7 +120,10 @@ def user_dashboard(request):
 def dashboard(request):
     creator = get_object_or_404(UserProfile, user=request.user)
     if creator.is_creator:
-        return render(request, 'guff/dashboard.html')
+        plan = getattr(creator, 'plan', None)
+        return render(request, 'guff/dashboard.html', {
+            'plan_id': plan.id if plan else None
+        })
     else:
         return redirect('user_dashboard')
 
@@ -130,11 +133,15 @@ def landing(request):
 @login_required(login_url='login')
 def creator_profile(request, username):
     user = get_object_or_404(UserProfile, user__username=username)
-    if user.is_creator:
-        return render(request, "guff/creator_profile.html", {
-            "user":user
-        })
-    return redirect('landing')
+
+    if not user.is_creator:
+        return redirect('user_dashboard')
+
+    plan = SubscriptionPlan.objects.filter(creator=user).first()
+
+    return render(request, "guff/creator_profile.html", {
+        "plan": plan.id if plan else None,
+    })
 
 @login_required(login_url='login')
 def subscription(request):

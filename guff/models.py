@@ -23,9 +23,9 @@ class SubscriptionPlan(models.Model):
         ("Y", "Yearly"),
     ]
 
-    creator = models.ForeignKey(UserProfile,
+    creator = models.OneToOneField(UserProfile,
         on_delete=models.CASCADE,
-        related_name="plans",
+        related_name="plan",
         db_index=True
     )
     subscription_bio = models.CharField(default="not provided", max_length=80)

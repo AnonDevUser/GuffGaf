@@ -1407,6 +1407,7 @@ ul {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     outline: none;
 }
+
 /* Success Page */
 .success-page {
     background-color: #fff;
@@ -1503,15 +1504,418 @@ ul {
     .success-card {
         padding: 40px 20px;
     }
+
     .success-title {
         font-size: 1.25rem;
     }
+
     .checkmark-circle {
         width: 80px;
         height: 80px;
     }
+
     .checkmark-icon {
         width: 40px;
         height: 40px;
     }
+}
+
+/* Creator Profile V2 */
+.profile-page-v2 {
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+    color: #000;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.profile-v2-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.avatar-v2-wrapper {
+    margin: 0 auto 24px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-v2-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+/* Loading Screen */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.profile-v2-container.is-loading {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.profile-v2-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.profile-v2-bio {
+    font-size: 1.25rem;
+    color: #64748b;
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-v2-label {
+    text-align: left;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #000;
+}
+
+/* Membership Card */
+.membership-v2-section {
+    margin-bottom: 40px;
+}
+
+.membership-v2-card {
+    border: 2px solid #3b82f6;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: left;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.membership-v2-label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #3b82f6;
+    margin-bottom: 4px;
+}
+
+.membership-v2-price {
+    font-size: 1rem;
+    color: #94a3b8;
+}
+
+/* Access Section */
+.access-v2-section {
+    margin-bottom: 40px;
+}
+
+.access-v2-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.access-v2-btn.discord {
+    background-color: #5865F2;
+    color: #fff;
+}
+
+.access-v2-btn.whatsapp {
+    background-color: #25D366;
+    color: #fff;
+}
+
+.access-v2-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icon-v2 {
+    width: 20px;
+    height: 20px;
+}
+
+.access-v2-links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+/* Benefits Section */
+.benefits-v2-section {
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.benefits-v2-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.benefit-v2-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.benefit-v2-icon {
+    font-size: 1.5rem;
+    background-color: #f8fafc;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.benefit-v2-text h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.benefit-v2-text p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* CTA Button */
+.cta-v2-btn {
+    width: 100%;
+    padding: 20px;
+    background-color: #3b82f666;
+    /* Light blue based on image */
+    color: #3b82f6;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.cta-v2-btn:hover {
+    background-color: #3b82f688;
+}
+
+.subscribe-esewa-btn {
+    background-color: #3b82f644;
+    color: #3b82f6;
+}
+
+.v2-watermark {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 640px) {
+    .profile-v2-title {
+        font-size: 2.5rem;
+    }
+
+    .profile-v2-container {
+        padding: 40px 20px;
+    }
+}
+/* Dashboard Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    background: #fff;
+    width: 90%;
+    max-width: 480px;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.9) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.close-modal {
+    background: #f1f5f9;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    transition: all 0.2s;
+}
+
+.close-modal:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.modal-body {
+    padding: 32px;
+}
+
+.modal-hint {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* Active Plan Card (Dashboard) */
+.active-plan-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.plan-info-v2 {
+    flex: 1;
+}
+
+.plan-status-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background-color: #dcfce7;
+    color: #166534;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.plan-info-v2 h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.plan-info-v2 p {
+    color: #64748b;
+    margin-bottom: 20px;
+    max-width: 450px;
+    line-height: 1.6;
+}
+
+.plan-price-tag {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.edit-plan-btn {
+    padding: 14px 28px;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.edit-plan-btn:hover {
+    background-color: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.edit-plan-btn:active {
+    transform: translateY(-1px);
 }
