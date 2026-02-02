@@ -5,6 +5,9 @@
 </head>
 <body>
     <h1> Hello world! </h1>
+    {% if id %}
+    {{ id }}
+    {% endif %}
     <img src="{% static 'images/backdrop.png' %}">
 </body>
 </html>
